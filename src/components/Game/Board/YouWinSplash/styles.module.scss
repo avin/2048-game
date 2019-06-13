@@ -1,0 +1,8 @@
+@import '../RestartSplash/styles.module';
+
+.youWin {
+	@extend .restart;
+
+	font-size: 2.5em;
+	flex-direction: column;
+}
