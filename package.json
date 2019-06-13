@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "preact-2048",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"license": "MIT",
 	"scripts": {
 		"start": "per-env",
@@ -15,12 +15,6 @@
 		"prettier": "prettier --write \"src/**/*.{js,json,css}\"",
 		"lint": "eslint src/**/*.js"
 	},
-	"eslintConfig": {
-		"extends": "eslint-config-synacor"
-	},
-	"eslintIgnore": [
-		"build/*"
-	],
 	"devDependencies": {
 		"babel-eslint": "^10.0.1",
 		"eslint": "^4.9.0",
