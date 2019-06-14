@@ -10,10 +10,14 @@ html, body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	user-select: none;
+	overscroll-behavior: contain;
+	overflow: hidden;
+	touch-action: manipulation;
 }
 
 * {
 	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
 }
 
 #app {

@@ -10,6 +10,9 @@
 	font-weight: bold;
 	opacity: 0.5;
 	text-align: center;
-	top: -60px;
-	left: 25%;
+	//left: 25%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }

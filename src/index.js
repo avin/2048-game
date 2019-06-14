@@ -8,7 +8,6 @@ import { prepareBrowser } from './utils/browser';
 
 prepareBrowser();
 const store = configureStore();
-
 store.dispatch(restartGame());
 
 // eslint-disable-next-line react/display-name

@@ -34,8 +34,18 @@ const colors = {
 class Board extends Component {
 	busy = false;
 
-	handleKeyPress = event => {
+	touchstartX = 0;
+
+	touchstartY = 0;
+
+	touchendX = 0;
+
+	touchendY = 0;
+
+	processMove(direction) {
 		const {
+			isYouWin,
+			isGameOver,
 			moveUp,
 			moveDown,
 			moveLeft,
@@ -45,8 +55,6 @@ class Board extends Component {
 			boardCells,
 			boardSize,
 			checkIsGameOver,
-			isYouWin,
-			isGameOver,
 		} = this.props;
 
 		if (isYouWin || isGameOver || this.busy) {
@@ -54,26 +62,26 @@ class Board extends Component {
 		}
 
 		let moved = false;
-		switch (event.key) {
-			case 'ArrowUp':
+		switch (direction) {
+			case 'up':
 				moved = isAllowToMove(boardCells, boardSize, 'up');
 				if (moved) {
 					moveUp();
 				}
 				break;
-			case 'ArrowDown':
+			case 'down':
 				moved = isAllowToMove(boardCells, boardSize, 'down');
 				if (moved) {
 					moveDown();
 				}
 				break;
-			case 'ArrowLeft':
+			case 'left':
 				moved = isAllowToMove(boardCells, boardSize, 'left');
 				if (moved) {
 					moveLeft();
 				}
 				break;
-			case 'ArrowRight':
+			case 'right':
 				moved = isAllowToMove(boardCells, boardSize, 'right');
 				if (moved) {
 					moveRight();
@@ -84,25 +92,89 @@ class Board extends Component {
 		if (moved) {
 			generateNewCells();
 
-			if (['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft'].includes(event.key)) {
-				this.busy = true;
-				setTimeout(() => {
-					this.busy = false;
-					cleanAfterMove();
-					checkIsGameOver();
-				}, 100);
-			}
+			this.busy = true;
+			setTimeout(() => {
+				this.busy = false;
+				cleanAfterMove();
+				checkIsGameOver();
+			}, 100);
+		}
+	}
+
+	handleKeyPress = event => {
+		switch (event.key) {
+			case 'ArrowUp':
+				this.processMove('up');
+				break;
+			case 'ArrowDown':
+				this.processMove('down');
+				break;
+			case 'ArrowLeft':
+				this.processMove('left');
+				break;
+			case 'ArrowRight':
+				this.processMove('right');
+				break;
 		}
 	};
 
-	marginSizePx;
+	handleGesture() {
+		if (!(this.touchstartX && this.touchstartY)) {
+			return;
+		}
+
+		const diffX = this.touchendX - this.touchstartX;
+		const diffY = this.touchendY - this.touchstartY;
+
+		const absDiffX = Math.abs(diffX);
+		const absDiffY = Math.abs(diffY);
+
+		if (Math.max(absDiffX, absDiffY) > 25) {
+			if (absDiffX > absDiffY) {
+				if (diffX > 0) {
+					this.processMove('right');
+				} else {
+					this.processMove('left');
+				}
+			} else {
+				// eslint-disable-next-line no-lonely-if
+				if (diffY > 0) {
+					this.processMove('down');
+				} else {
+					this.processMove('up');
+				}
+			}
+
+			this.touchstartX = 0;
+			this.touchstartY = 0;
+		}
+	}
+
+	handleTouhchStart = event => {
+		this.touchstartX = event.changedTouches[0].screenX;
+		this.touchstartY = event.changedTouches[0].screenY;
+	};
+
+	handleTouhchMove = event => {
+		this.touchendX = event.changedTouches[0].screenX;
+		this.touchendY = event.changedTouches[0].screenY;
+		this.handleGesture();
+	};
 
 	componentDidMount() {
 		document.addEventListener('keydown', this.handleKeyPress);
+
+		const gestureZone = this.boardRef;
+		gestureZone.addEventListener('touchstart', this.handleTouhchStart, false);
+		gestureZone.addEventListener('touchmove', this.handleTouhchMove, false);
 	}
 
 	componentWillUnmount() {
 		document.removeEventListener('keydown', this.handleKeyPress);
+
+		const gestureZone = this.boardRef;
+		gestureZone.removeEventListener('touchstart', this.handleTouhchStart);
+		gestureZone.removeEventListener('touchend', this.handleTouhchEnd);
 	}
 
 	renderBackCells() {
@@ -147,8 +219,8 @@ class Board extends Component {
 					style={{
 						width: cellSizePx,
 						height: cellSizePx,
-						left: x * cellSize + marginSizePx,
-						top: cellSize * y + marginSizePx,
+						transform: `translateX(${x * cellSize + marginSizePx}px) translateY(${cellSize * y +
+							marginSizePx}px)`,
 					}}
 				>
 					<div
@@ -177,6 +249,9 @@ class Board extends Component {
 		return (
 			<div
 				className={styles.board}
+				ref={i => {
+					this.boardRef = i;
+				}}
 				style={{
 					width: boardSizePx,
 					height: boardSizePx,

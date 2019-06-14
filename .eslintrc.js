@@ -8,7 +8,7 @@ module.exports = {
 	plugins: ['import', 'react'],
 	rules: {
 		indent: ['error', 'tab', { SwitchCase: 1 }],
-		'max-len': ['error', 120],
+		'max-len': ['error', 120, {ignoreTemplateLiterals: true, ignoreRegExpLiterals: true}],
 		'no-bitwise': 'off',
 		'default-case': 'off',
 

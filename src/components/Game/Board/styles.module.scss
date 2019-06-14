@@ -27,8 +27,8 @@ $cellAnimationSpeed: 100ms;
 	justify-content: center;
 	align-items: center;
 
-	transition: all $cellAnimationSpeed ease;
-	transition-property: left, top;
+	transition: transform $cellAnimationSpeed ease;
+	//transition-property: transform;
 
 	.inner {
 		display: flex;
