@@ -11,7 +11,7 @@ export default function reducer(state = initialState, action = {}) {
 		switch (action.type) {
 			case SET_UI_SETTINGS_VALUES: {
 				const { values } = action;
-				return state.merge(values);
+				return { ...state, ...values };
 			}
 
 			default:

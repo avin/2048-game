@@ -94,14 +94,15 @@ export default function reducer(state = initialState, action = {}) {
 				return state;
 			}
 			case CLEAN_AFTER_MOVE: {
-				state.boardCells = state.boardCells
-					.filter(cell => !cell.toRemove)
-					.map(cell => {
+				state.boardCells = state.boardCells.reduce((p, cell) => {
+					if (!cell.toRemove) {
 						delete cell.moved;
 						delete cell.isMerged;
 						delete cell.isNew;
-						return cell;
-					});
+						p.push(cell);
+					}
+					return p;
+				}, []);
 
 				return state;
 			}
