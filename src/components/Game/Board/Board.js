@@ -156,8 +156,26 @@ class Board extends Component {
 	};
 
 	handleTouhchMove = event => {
+		event.preventDefault();
 		this.touchendX = event.changedTouches[0].screenX;
 		this.touchendY = event.changedTouches[0].screenY;
+		this.handleGesture();
+	};
+
+	handleMouseStart = event => {
+		this.touchstartX = event.pageX;
+		this.touchstartY = event.pageY;
+	};
+
+	handleMouseEnd = () => {
+		this.touchstartX = 0;
+		this.touchstartY = 0;
+	};
+
+	handleMouseMove = event => {
+		event.preventDefault();
+		this.touchendX = event.pageX;
+		this.touchendY = event.pageY;
 		this.handleGesture();
 	};
 
@@ -167,6 +185,10 @@ class Board extends Component {
 		const gestureZone = this.boardRef;
 		gestureZone.addEventListener('touchstart', this.handleTouhchStart, false);
 		gestureZone.addEventListener('touchmove', this.handleTouhchMove, false);
+
+		document.addEventListener('mousedown', this.handleMouseStart, false);
+		document.addEventListener('mouseup', this.handleMouseEnd, false);
+		document.addEventListener('mousemove', this.handleMouseMove, false);
 	}
 
 	componentWillUnmount() {
@@ -175,6 +197,9 @@ class Board extends Component {
 		const gestureZone = this.boardRef;
 		gestureZone.removeEventListener('touchstart', this.handleTouhchStart);
 		gestureZone.removeEventListener('touchend', this.handleTouhchEnd);
+
+		document.removeEventListener('mousedown', this.handleMouseStart);
+		document.removeEventListener('mousemove', this.handleMouseMove);
 	}
 
 	renderBackCells() {
@@ -219,8 +244,7 @@ class Board extends Component {
 					style={{
 						width: cellSizePx,
 						height: cellSizePx,
-						transform: `translateX(${x * cellSize + marginSizePx}px) translateY(${cellSize * y +
-							marginSizePx}px)`,
+						transform: `translateX(${x * cellSize + marginSizePx}px) translateY(${cellSize * y + marginSizePx}px)`,
 					}}
 				>
 					<div

@@ -65,13 +65,9 @@
 	},
 	"jest": {
 		"verbose": true,
-		"setupFiles": [
-			"<rootDir>/tests/__mocks__/browserMocks.js"
-		],
 		"testRegex": "(/(__tests__|tests)/.*|(\\.|/)(test|spec))\\.jsx?$",
 		"testPathIgnorePatterns": [
-			"/node_modules/",
-			"<rootDir>/tests/__mocks__/*"
+			"/node_modules/"
 		],
 		"testURL": "http://localhost:8080",
 		"moduleFileExtensions": [
