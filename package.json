@@ -33,6 +33,7 @@
 			"@/(.*)$": "<rootDir>/src/$1"
 		}
 	},
+  "homepage": ".",
 	"dependencies": {
 		"@craco/craco": "6.1.2",
 		"@reduxjs/toolkit": "1.5.1",
