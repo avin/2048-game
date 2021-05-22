@@ -1,15 +1,12 @@
 /* eslint-disable */
 
 /**
- * >>> ⚠⚠⚠ ВНИМАНИЕ ⚠⚠⚠ <<<
- *
- * Данный файл отдает текущую конфиугурацию Webpack. Используется только для нужд IDE и react-cosmos.
- * Конфигурацию в этом файле не проводить!!! Для конфигурирования использовать craco.config.js
+ * >>> ⚠⚠⚠ Use craco.config.js to configure webpack ⚠⚠⚠ <<<
  */
 
 const { createWebpackDevConfig } = require('@craco/craco');
 const cracoConfig = require('./craco.config');
 
 module.exports = () => {
-  return createWebpackDevConfig(cracoConfig);
+	return createWebpackDevConfig(cracoConfig);
 };
