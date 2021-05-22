@@ -140,12 +140,12 @@ const Board = (): JSX.Element => {
 		}
 	}, [processMove]);
 
-	const handleTouhchStart = useCallback((event) => {
+	const handleTouchStart = useCallback((event) => {
 		touchstartXRef.current = event.changedTouches[0].screenX;
 		touchstartYRef.current = event.changedTouches[0].screenY;
 	}, []);
 
-	const handleTouhchMove = useCallback(
+	const handleTouchMove = useCallback(
 		(event) => {
 			event.preventDefault();
 			touchendXRef.current = event.changedTouches[0].screenX;
@@ -180,8 +180,8 @@ const Board = (): JSX.Element => {
 
 		const gestureZone = boardRef.current;
 		if (gestureZone) {
-			gestureZone.addEventListener('touchstart', handleTouhchStart, false);
-			gestureZone.addEventListener('touchmove', handleTouhchMove, false);
+			gestureZone.addEventListener('touchstart', handleTouchStart, false);
+			gestureZone.addEventListener('touchmove', handleTouchMove, false);
 		}
 
 		document.addEventListener('mousedown', handleMouseStart, false);
@@ -192,14 +192,14 @@ const Board = (): JSX.Element => {
 			document.removeEventListener('keydown', handleKeyPress);
 
 			if (gestureZone) {
-				gestureZone.removeEventListener('touchstart', handleTouhchStart);
-				// gestureZone.removeEventListener('touchend', handleTouhchEnd);
+				gestureZone.removeEventListener('touchstart', handleTouchStart);
+				// gestureZone.removeEventListener('touchend', handleTouchEnd);
 			}
 
 			document.removeEventListener('mousedown', handleMouseStart);
 			document.removeEventListener('mousemove', handleMouseMove);
 		};
-	}, [handleKeyPress, handleMouseEnd, handleMouseMove, handleMouseStart, handleTouhchMove, handleTouhchStart]);
+	}, [handleKeyPress, handleMouseEnd, handleMouseMove, handleMouseStart, handleTouchMove, handleTouchStart]);
 
 	const style = useMemo(
 		() => ({
