@@ -52,19 +52,8 @@ module.exports = {
 		'arrow-body-style': 0,
 		'import/order': 0,
 		'import/prefer-default-export': 0,
-		'import/no-extraneous-dependencies': [
-			'error',
-			{
-				devDependencies: [
-					'**/*.test.ts',
-					'**/*.fixture.tsx',
-					'./scripts/**',
-					'./additional/**',
-					'./src/cosmos.decorator.tsx',
-					'./src/setupProxy.js',
-				],
-			},
-		],
+		'import/no-extraneous-dependencies': 0,
+		'import/no-duplicates': 0,
 		'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
 		'react/require-default-props': 0,
 		'react/jsx-props-no-spreading': 0,
