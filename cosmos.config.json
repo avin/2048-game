@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json.schemastore.org/cosmos-config",
+
+  "dom": {
+    "containerQuerySelector": "#root"
+  },
+  "webpack": {
+    "configPath": "webpack.config.js"
+  },
+  "staticPath": "public",
+  "globalImports": ["./src/styles/index.scss", "./src/styles/cosmos.scss", "./src/cosmos.global.ts"],
+  "watchDirs": ["./src"],
+  "port": 8889,
+  "https": true,
+  "httpsOptions": {
+    "certPath": "./node_modules/localhost-certs/files/server.crt",
+    "keyPath": "./node_modules/localhost-certs/files/server.key"
+  }
+}

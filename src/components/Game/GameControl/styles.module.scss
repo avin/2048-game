@@ -1,3 +1,5 @@
+@import '~@/styles/_mixins.scss';
+
 .gameControl {
 	display: flex;
 }
@@ -26,6 +28,7 @@
 }
 
 .controlButton {
+  @include button-reset;
 	background-color: hsl(28, 16%, 68%);
 	display: flex;
 	justify-content: center;

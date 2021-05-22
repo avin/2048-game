@@ -1,24 +1,30 @@
 module.exports = {
-	parser: 'babel-eslint',
-	extends: ['airbnb-base', 'plugin:import/errors', 'prettier', 'plugin:react/recommended'],
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		project: './tsconfig.eslint.json',
+	},
+	extends: [
+		'airbnb-typescript',
+		'airbnb/hooks',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		'plugin:prettier/recommended',
+		'plugin:css-modules/recommended',
+		'plugin:react-perf/recommended',
+	],
+	plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', 'css-modules', 'react-perf'],
 	env: {
 		browser: true,
 		jest: true,
 	},
-	plugins: ['import', 'react'],
 	rules: {
-		indent: ['error', 'tab', { SwitchCase: 1 }],
-		'max-len': ['error', 120, {ignoreTemplateLiterals: true, ignoreRegExpLiterals: true}],
-		'no-bitwise': 'off',
-		'default-case': 'off',
-
-		'no-mixed-operators': 'off',
-		'no-await-in-loop': 'off',
-		'func-names': ['error', 'never'],
+		'spaced-comment': ['warn', 'always', { markers: ['/'] }],
+		curly: ['error', 'all'],
+		'no-unused-vars': [1, { args: 'none', ignoreRestSiblings: true }],
 		'no-underscore-dangle': [
-			'error',
+			1,
 			{
-				allow: ['__REDUX_DEVTOOLS_EXTENSION__'],
+				allow: ['__REDUX_DEVTOOLS_EXTENSION__', '_paq'],
 			},
 		],
 		'prefer-destructuring': [
@@ -29,7 +35,7 @@ module.exports = {
 					object: true,
 				},
 				AssignmentExpression: {
-					array: true,
+					array: false,
 					object: false,
 				},
 			},
@@ -37,23 +43,88 @@ module.exports = {
 				enforceForRenamedProperties: false,
 			},
 		],
-		'import/prefer-default-export': 'off',
-		'import/no-named-as-default': 'off',
+		'jsx-a11y/control-has-associated-label': 0,
+		'jsx-a11y/label-has-associated-control': 0,
+		'no-console': ['warn', { allow: ['warn', 'error', 'info', 'dir'] }],
+		'no-param-reassign': 0,
+		'no-void': 0,
+		'class-methods-use-this': 0,
+		// 'consistent-return': 0,
+		// 'no-shadow': 0,
+		// 'no-new': 0,
+		'arrow-body-style': 0,
+		'import/order': 0,
+		'import/prefer-default-export': 0,
+		// 'import/extensions': [
+		//   'error',
+		//   'ignorePackages',
+		//   {
+		//     js: 'never',
+		//     jsx: 'never',
+		//     ts: 'never',
+		//     tsx: 'never',
+		//   },
+		// ],
 		'import/no-extraneous-dependencies': [
 			'error',
-			{ devDependencies: ['**/*.test.js', '**/*.spec.js', '**/test/*.js', '**/__tests__/*.js'] },
+			{
+				devDependencies: [
+					'**/*.test.ts',
+					'**/*.fixture.tsx',
+					'./scripts/**',
+					'./additional/**',
+					'./src/cosmos.decorator.tsx',
+					'./src/setupProxy.js',
+				],
+			},
 		],
-		'no-param-reassign': 'off',
-		'class-methods-use-this': 'off',
-		'no-shadow': 'off',
-		'consistent-return': 'off',
-		'spaced-comment': ['error', 'always'],
-		'react/prop-types': 'off',
+		// 'react/static-property-placement': 0,
+		'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+		// 'react/forbid-prop-types': 0,
+		'react/require-default-props': 0,
+		// 'react/jsx-wrap-multilines': ['error', { declaration: false }],
+		// 'react/jsx-one-expression-per-line': 0,
+		'react/jsx-props-no-spreading': 0,
+		'react/prop-types': 0,
+		'react-perf/jsx-no-new-object-as-prop': [
+			'error',
+			{
+				nativeAllowList: ['style'],
+			},
+		],
+
+		'@typescript-eslint/ban-types': [
+			'error',
+			{
+				extendDefaults: true,
+				types: {
+					'{}': false,
+				},
+			},
+		],
+
+		// Отключаем параноидальные правила TS
+		'@typescript-eslint/no-unsafe-assignment': 0,
+		'@typescript-eslint/no-unsafe-call': 0,
+		'@typescript-eslint/no-unsafe-member-access': 0,
+		'@typescript-eslint/no-empty-interface': 0,
+		// '@typescript-eslint/ban-ts-comment': 0,
+
+		// не дружит в react-hook-form
+		'@typescript-eslint/unbound-method': 0,
 	},
+	overrides: [
+		{
+			files: ['*.fixture.tsx'],
+			rules: {
+				'react-perf/jsx-no-new-object-as-prop': 0,
+			},
+		},
+	],
 	settings: {
 		react: {
-			pragma: 'h',
-			version: '16.8',
+			version: require('react/package.json').version,
 		},
+		'import/resolver': 'webpack',
 	},
 };

@@ -11,7 +11,7 @@ the same number touch, they __merge into one__!
 
 [ [>> **Play online** <<](https://avin.github.io/2048-game ) ]
 
-[![Preview](./assets/preview.png)](https://avin.github.io/2048-game )
+[![Preview](../assets/preview.png)](https://avin.github.io/2048-game )
 
 ## License
 

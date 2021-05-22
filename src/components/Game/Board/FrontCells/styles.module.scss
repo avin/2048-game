@@ -1,0 +1,50 @@
+$cellAnimationSpeed: 100ms;
+
+@keyframes newCell {
+	from {
+		transform: scale(0);
+	}
+
+	to {
+		transform: scale(1);
+	}
+}
+
+@keyframes mergedCell {
+	from {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.2);
+	}
+
+	to {
+		transform: scale(1);
+	}
+}
+
+.frontCell {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	transition: transform $cellAnimationSpeed ease;
+	//transition-property: transform;
+
+	.inner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&.isNewCell {
+			animation: newCell $cellAnimationSpeed;
+		}
+
+		&.isMergedCell {
+			animation: mergedCell $cellAnimationSpeed;
+			z-index: 999;
+		}
+	}
+}
