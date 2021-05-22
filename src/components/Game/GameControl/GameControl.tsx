@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import styles from './styles.module.scss';
 import { boardSizePxSelector } from '@/redux/selectors';
-import UndoIcon from '../../icons/UndoIcon/UndoIcon';
-import ReloadIcon from '../../icons/ReloadIcon/ReloadIcon';
+import UndoIcon from '../../common/UndoIcon/UndoIcon';
+import ReloadIcon from '../../common/ReloadIcon/ReloadIcon';
 import { RootState } from '@/redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { restartGame, restoreLastMove, setIsRestartGameAlerting } from '@/redux/reducers/data';

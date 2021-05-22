@@ -49,22 +49,9 @@ module.exports = {
 		'no-param-reassign': 0,
 		'no-void': 0,
 		'class-methods-use-this': 0,
-		// 'consistent-return': 0,
-		// 'no-shadow': 0,
-		// 'no-new': 0,
 		'arrow-body-style': 0,
 		'import/order': 0,
 		'import/prefer-default-export': 0,
-		// 'import/extensions': [
-		//   'error',
-		//   'ignorePackages',
-		//   {
-		//     js: 'never',
-		//     jsx: 'never',
-		//     ts: 'never',
-		//     tsx: 'never',
-		//   },
-		// ],
 		'import/no-extraneous-dependencies': [
 			'error',
 			{
@@ -78,12 +65,8 @@ module.exports = {
 				],
 			},
 		],
-		// 'react/static-property-placement': 0,
 		'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-		// 'react/forbid-prop-types': 0,
 		'react/require-default-props': 0,
-		// 'react/jsx-wrap-multilines': ['error', { declaration: false }],
-		// 'react/jsx-one-expression-per-line': 0,
 		'react/jsx-props-no-spreading': 0,
 		'react/prop-types': 0,
 		'react-perf/jsx-no-new-object-as-prop': [
@@ -103,15 +86,11 @@ module.exports = {
 			},
 		],
 
-		// Отключаем параноидальные правила TS
 		'@typescript-eslint/no-unsafe-assignment': 0,
 		'@typescript-eslint/no-unsafe-call': 0,
 		'@typescript-eslint/no-unsafe-member-access': 0,
 		'@typescript-eslint/no-empty-interface': 0,
-		// '@typescript-eslint/ban-ts-comment': 0,
-
-		// не дружит в react-hook-form
-		'@typescript-eslint/unbound-method': 0,
+		'@typescript-eslint/no-loop-func': 0,
 	},
 	overrides: [
 		{

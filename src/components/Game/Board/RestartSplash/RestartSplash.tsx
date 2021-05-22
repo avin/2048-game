@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
-import cn from 'clsx';
-import styles from './styles.module.scss';
+import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/reducers';
 import { restartGame, setIsRestartGameAlerting } from '@/redux/reducers/data';
 import { AppThunkDispatch } from '@/redux/configureStore';
+import styles from './styles.module.scss';
+import Splash from '@/components/common/Splash/Splash';
 
 const RestartSplash = (): JSX.Element => {
 	const active = useSelector((state: RootState) => state.data.isRestartGameAlerting);
@@ -19,23 +19,21 @@ const RestartSplash = (): JSX.Element => {
 		dispatch(setIsRestartGameAlerting({ value: false }));
 	}, [dispatch]);
 
-	return (
-		<div
-			className={cn(styles.restart, {
-				[styles.active]: active,
-			})}
-		>
-			<div className={styles.question}>Restart game?</div>
-			<div className={styles.answers}>
-				<button type="button" className={styles.answer} onClick={handleClickYes}>
-					YES
-				</button>
-				<button type="button" className={styles.answer} onClick={handleClickNo}>
-					NO
-				</button>
-			</div>
-		</div>
+	const answers = useMemo(
+		() => [
+			{
+				title: 'YES',
+				onClick: handleClickYes,
+			},
+			{
+				title: 'NO',
+				onClick: handleClickNo,
+			},
+		],
+		[handleClickYes, handleClickNo],
 	);
+
+	return <Splash question="Restart game?" className={styles.splash} active={active} answers={answers} />;
 };
 
 export default RestartSplash;
