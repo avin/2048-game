@@ -1,0 +1,16 @@
+@import '~@/styles/mixins';
+
+.main {
+	color: #959da5;
+}
+
+.octicon {
+	fill: #c9bfb1;
+	opacity: 0.5;
+	transition: opacity 200ms linear;
+	width: 40px;
+
+	&:hover {
+		opacity: 1;
+	}
+}

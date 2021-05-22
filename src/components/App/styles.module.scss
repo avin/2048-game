@@ -1,0 +1,14 @@
+.app {
+	display: grid;
+	grid-template-rows: 60px auto 60px;
+	min-height: 100vh;
+}
+
+.headSpace {
+}
+
+.footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
